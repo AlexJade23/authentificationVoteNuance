@@ -128,13 +128,16 @@ class EmailService:
         message.attach(MIMEText(html_content, "html"))
 
         try:
+            # Port 465 = SSL direct (use_tls), Port 587 = STARTTLS (start_tls)
+            use_ssl = self.settings.smtp_port == 465
             await aiosmtplib.send(
                 message,
                 hostname=self.settings.smtp_host,
                 port=self.settings.smtp_port,
                 username=self.settings.smtp_user,
                 password=self.settings.smtp_password,
-                start_tls=True,
+                use_tls=use_ssl,
+                start_tls=not use_ssl,
             )
             logger.info(f"Email envoyé à {to_email}")
             return True
