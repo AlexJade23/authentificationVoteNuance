@@ -11,16 +11,10 @@
 - [x] Guide d'intégration pour développeurs (`INTEGRATION.md`)
 - [x] Spécifications techniques (`authentificationVoteNuance.md`)
 
-## Intégration frontend
+## Intégration frontend (hors scope)
 
-Voir le guide complet : [INTEGRATION.md](./INTEGRATION.md)
-
-- [ ] Créer la page de login (formulaire email)
-- [ ] Créer la page d'attente magic link (avec champ code)
-- [ ] Créer la page de saisie TOTP
-- [ ] Créer le callback `/auth/callback` pour récupérer le token
-- [ ] Implémenter le stockage du JWT (cookie HttpOnly recommandé)
-- [ ] Créer la page paramètres sécurité (activation TOTP)
+> Le frontend est développé séparément dans le projet `app.decision-collective.fr`.
+> Voir le guide d'intégration : [INTEGRATION.md](./INTEGRATION.md)
 
 ## Tests
 
@@ -68,7 +62,6 @@ Voir le guide complet : [INTEGRATION.md](./INTEGRATION.md)
 | SSL/HTTPS | ✅ Let's Encrypt |
 | SMTP | ✅ Infomaniak |
 | Documentation | ✅ Complète |
-| Frontend | ⏳ À développer |
 
 **URL Production** : https://auth.decision-collective.fr
 **Swagger UI** : https://auth.decision-collective.fr/docs
