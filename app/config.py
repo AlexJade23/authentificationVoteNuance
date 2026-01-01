@@ -3,14 +3,14 @@ from functools import lru_cache
 
 
 class Settings(BaseSettings):
-    # Database
-    database_url: str = "postgresql://authuser:authpassword@localhost:5432/authdb"
+    # Database (REQUIRED - no default)
+    database_url: str
 
-    # Security
-    jwt_secret: str = "change-me-in-production"
+    # Security (REQUIRED - no default, must be set in .env)
+    jwt_secret: str
     jwt_algorithm: str = "HS256"
     jwt_expire_days: int = 7
-    encryption_key: str = "change-me-in-production-32-bytes"
+    encryption_key: str
 
     # TOTP
     totp_issuer: str = "DecisionCollective"
