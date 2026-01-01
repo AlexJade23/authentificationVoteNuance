@@ -2,16 +2,18 @@
 
 ## Configuration requise
 
-- [ ] **Configurer SMTP** dans `.env` pour l'envoi des magic links
-  ```bash
-  SMTP_USER=votre-api-key-brevo
-  SMTP_PASSWORD=votre-password-brevo
-  ```
-  Puis redémarrer : `sudo systemctl restart auth-service`
-
+- [x] **Configurer SMTP** - Infomaniak (mail.infomaniak.com:587)
 - [ ] **Configurer le DNS** pour `app.decision-collective.fr` (frontend)
 
+## Documentation
+
+- [x] README.md avec instructions d'installation
+- [x] Guide d'intégration pour développeurs (`INTEGRATION.md`)
+- [x] Spécifications techniques (`authentificationVoteNuance.md`)
+
 ## Intégration frontend
+
+Voir le guide complet : [INTEGRATION.md](./INTEGRATION.md)
 
 - [ ] Créer la page de login (formulaire email)
 - [ ] Créer la page d'attente magic link (avec champ code)
@@ -22,8 +24,9 @@
 
 ## Tests
 
-- [ ] Tester le flow complet d'inscription
-- [ ] Tester le flow complet de connexion magic link
+- [x] Test envoi email magic link
+- [ ] Tester le flow complet d'inscription (frontend)
+- [ ] Tester le flow complet de connexion magic link (frontend)
 - [ ] Tester le flow connexion avec TOTP activé
 - [ ] Tester les codes de récupération TOTP
 - [ ] Tester la suppression de compte (RGPD)
@@ -63,7 +66,9 @@
 | PostgreSQL | ✅ Configuré |
 | Nginx | ✅ Configuré |
 | SSL/HTTPS | ✅ Let's Encrypt |
-| SMTP | ⏳ À configurer |
+| SMTP | ✅ Infomaniak |
+| Documentation | ✅ Complète |
 | Frontend | ⏳ À développer |
 
 **URL Production** : https://auth.decision-collective.fr
+**Swagger UI** : https://auth.decision-collective.fr/docs
