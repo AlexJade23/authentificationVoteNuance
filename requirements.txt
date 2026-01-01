@@ -1,0 +1,29 @@
+# FastAPI et serveur
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+python-multipart==0.0.6
+
+# Base de données
+sqlalchemy==2.0.25
+psycopg2-binary==2.9.9
+alembic==1.13.1
+
+# Sécurité
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+cryptography==42.0.0
+pyotp==2.9.0
+qrcode[pil]==7.4.2
+
+# Validation
+pydantic[email-validator]==2.5.3
+pydantic-settings==2.1.0
+
+# Email
+aiosmtplib==3.0.1
+
+# Rate limiting
+slowapi==0.1.9
+
+# Utilitaires
+python-dotenv==1.0.0
