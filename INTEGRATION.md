@@ -33,8 +33,12 @@ Documentation pour intégrer l'authentification dans l'application frontend.
        │   GET /auth/verify/{token}                │
        │────────────────────>│                     │
        │                     │                     │
-       │  Redirect vers      │                     │
+       │  Si OK: Redirect    │                     │
        │  /auth/callback?token=JWT                 │
+       │<────────────────────│                     │
+       │                     │                     │
+       │  Si expiré: Redirect│                     │
+       │  /auth/error?reason=token_expired         │
        │<────────────────────│                     │
        │                     │                     │
        │  Stocke le JWT      │                     │
@@ -78,7 +82,56 @@ Documentation pour intégrer l'authentification dans l'application frontend.
 | Attente | `/login/pending` | "Vérifiez votre email" + champ code |
 | TOTP | `/login/totp` | Saisie code 6 chiffres |
 | Callback | `/auth/callback` | Récupère le token, redirige |
+| **Erreur auth** | `/auth/error` | **Affiche les erreurs d'authentification** |
 | Paramètres | `/settings/security` | Activer/désactiver TOTP |
+
+### Page d'erreur `/auth/error`
+
+Quand un magic link est invalide ou expiré, l'API redirige vers `/auth/error` avec un paramètre `reason`.
+
+**URL de redirection :**
+```
+https://app.decision-collective.fr/auth/error?reason=token_expired
+```
+
+**Paramètres query string :**
+
+| Paramètre | Valeurs possibles | Description |
+|-----------|-------------------|-------------|
+| `reason` | `token_expired` | Le magic link a expiré (durée de vie : 15 min) |
+
+**Exemple d'implémentation (React) :**
+
+```jsx
+// pages/auth/error.jsx
+import { useSearchParams, Link } from 'react-router-dom';
+
+const ERROR_MESSAGES = {
+  token_expired: {
+    title: 'Lien expiré',
+    message: 'Ce lien de connexion a expiré. Les liens sont valables 15 minutes.',
+    action: 'Demander un nouveau lien'
+  }
+};
+
+export default function AuthError() {
+  const [params] = useSearchParams();
+  const reason = params.get('reason') || 'unknown';
+  const error = ERROR_MESSAGES[reason] || {
+    title: 'Erreur',
+    message: 'Une erreur est survenue lors de la connexion.',
+    action: 'Réessayer'
+  };
+
+  return (
+    <div className="auth-error">
+      <h1>{error.title}</h1>
+      <p>{error.message}</p>
+      <Link to="/login">{error.action}</Link>
+    </div>
+  );
+}
+```
 
 ---
 

@@ -97,9 +97,9 @@ async def verify_token(
     ).first()
 
     if not auth_token:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Token invalide ou expiré"
+        return RedirectResponse(
+            url=f"{settings.frontend_url}/auth/error?reason=token_expired",
+            status_code=302
         )
 
     user = auth_token.user
